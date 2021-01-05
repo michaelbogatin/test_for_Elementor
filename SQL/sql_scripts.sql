@@ -35,8 +35,9 @@ select *
 from promotion inner join site_visitors using (site) 
 where date between start_date and end_date 
 )
-select sumif(in_promotion.number_of_visitors)*100/sum(all_sites.number_of_visitors) as  percent_of_the_site_traffic_on_on promotion_dates 
-from all_sites_in_promotion_dates in_promotion join sites all_sites on (site);
+select  start_date, end_date, promotion_code, sum(in_promotion.number_of_visitors)*100/sum(all_sites.number_of_visitors) as  percent_of_the_site_traffic_on_on promotion_dates 
+from all_sites_in_promotion_dates in_promotion join sites all_sites on (site)
+group by start_date, end_date, promotion_code;
 
 
 
